@@ -1,6 +1,6 @@
 {
   "name": "thegendiff",
-  "version": "0.0.01",
+  "version": "0.0.03",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -31,8 +31,11 @@
   "files": [
     "dist"
   ],
-  "bin": {},
+  "bin": {
+    "gendiff": "dist/bin/gendiff.js"
+  },
   "dependencies": {
+    "commander": "^2.15.0",
     "hexlet-pairs": "^1.0.5",
     "readline-sync": "^1.4.8"
   }

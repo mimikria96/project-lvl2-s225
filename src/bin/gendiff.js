@@ -3,4 +3,5 @@ import program from 'commander';
 import gendiffBody from '..';
 
 
-gendiffBody().parse(process.argv);
+gendiffBody();
+program.parse(process.argv);
