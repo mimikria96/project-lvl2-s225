@@ -1,7 +1,5 @@
 #!/usr/bin/env node
-import program from 'commander';
-import gendiffBody from '..';
+import {programCli} from '..';
 
 
-gendiffBody();
-program.parse(process.argv);
+programCli();
