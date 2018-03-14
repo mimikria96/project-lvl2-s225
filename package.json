@@ -1,6 +1,6 @@
 {
   "name": "thegendiff",
-  "version": "0.0.05",
+  "version": "0.0.06",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "commander": "^2.15.0",
+    "ini": "^1.3.5",
     "js-yaml": "^3.11.0",
     "lodash": "^4.17.5",
     "readline-sync": "^1.4.8"

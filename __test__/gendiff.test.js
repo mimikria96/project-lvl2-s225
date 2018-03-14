@@ -8,5 +8,5 @@ const expected =
  + verbose: true`;
 
 test('tostring files diff', () => {
-  expect(genDiff('./__test__/__fixtures__/before.yaml', './__test__/__fixtures__/after.yaml')).toBe(expected);
+  expect(genDiff('./__test__/__fixtures__/before.ini', './__test__/__fixtures__/after.ini')).toBe(expected);
 });
