@@ -1,11 +1,32 @@
 import program from 'commander';
 import * as _ from 'lodash';
 import fs from 'fs';
+import path from 'path';
+import yaml from 'js-yaml';
+
+const fileTypesParse = [
+  {
+  type: 'yaml',
+  check: file => path.extname(file) === '.yaml',
+  parse: file => yaml.safeLoad(file)
+  },
+  {
+  type: 'json',
+  check: file => path.extname(file) === '.json',
+  parse: file => JSON.parse(file)
+  }
+];
+  //const data = fs.readFileSync(file)
+  //return JSON.parse(data);
+
+const getParseMethod = arg => _.find(fileTypesParse, ({ check }) => check(arg));
 
 const parseFile = (file) => {
-  const data = fs.readFileSync(file)
-  return JSON.parse(data);
-};
+  const { parse } = getParseMethod(file);
+  return parse(fs.readFileSync(file));
+}
+
+
 
 export const genDiff = (fileBefore, fileAfter) => {
   const objBefore = parseFile(fileBefore);

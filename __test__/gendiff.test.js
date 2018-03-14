@@ -1,4 +1,4 @@
-import {genDiff} from '../src/index';
+import {genDiff} from '../src/';
 
 const expected =
   `host: hexlet.io
@@ -8,5 +8,5 @@ const expected =
  + verbose: true`;
 
 test('tostring files diff', () => {
-  expect(genDiff('./__test__/__fixtures__/before.json', './__test__/__fixtures__/after.json')).toBe(expected);
+  expect(genDiff('./__test__/__fixtures__/before.yaml', './__test__/__fixtures__/after.yaml')).toBe(expected);
 });
