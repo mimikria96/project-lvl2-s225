@@ -1,4 +1,4 @@
-import {genDiff} from '../src/';
+import genDiff from '../src/';
 
 const expected =
   `host: hexlet.io

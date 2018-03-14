@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import programCli from '../parser';
+import programCli from '../program';
 
 
 programCli();
