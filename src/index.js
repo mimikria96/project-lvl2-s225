@@ -16,17 +16,13 @@ const fileTypesParse = [
   parse: file => JSON.parse(file)
   }
 ];
-  //const data = fs.readFileSync(file)
-  //return JSON.parse(data);
 
 const getParseMethod = arg => _.find(fileTypesParse, ({ check }) => check(arg));
 
 const parseFile = (file) => {
   const { parse } = getParseMethod(file);
   return parse(fs.readFileSync(file));
-}
-
-
+};
 
 export const genDiff = (fileBefore, fileAfter) => {
   const objBefore = parseFile(fileBefore);
