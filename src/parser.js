@@ -1,5 +1,4 @@
-import fs from 'fs';
-import path from 'path';
+
 import yaml from 'js-yaml';
 import ini from 'ini';
 
@@ -11,9 +10,7 @@ const typeParsers = {
   '.ini': ini.parse,
 };
 
-const parseFile = (file) => {
-  const format = path.extname(file);
-  const data = fs.readFileSync(file, 'utf-8');
-  return typeParsers[format](data);
+const parseFile = (file, format) => {
+  return typeParsers[format](file);
 };
 export default parseFile;
