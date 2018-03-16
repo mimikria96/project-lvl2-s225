@@ -27,8 +27,8 @@ const expectedtree =
         }
     }
     group1: {
-      + baz: bars
       - baz: bas
+      + baz: bars
         foo: bar
       - nest: {
             key: value

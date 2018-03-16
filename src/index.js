@@ -23,46 +23,46 @@ const buildAst = (obj1, obj2) => {
   return keys.map(key => build(key, obj1, obj2));
 };
 
-const strValue = (value) => {
+const strValue = (value, offset) => {
   if (_.isObject(value)) {
   const keys = Object.keys(value);
-  const str = keys.map(n => `${' '.repeat(8)}${n}: ${value[n]}`).join('\n');
-    return `{\n${str}\n${' '.repeat(4)}}`;
+  const str = keys.map(n => `${' '.repeat(offset+4)}${n}: ${value[n]}`).join('\n');
+    return `{\n${str}\n${' '.repeat(offset)}}`;
   }
   return `${value}`;
 };
 
-const delited = (obj) => {
+const delited = (obj, offset) => {
   const name = obj.key;
   const value = obj.value;
-  return `${' '.repeat(2)}- ${name}: ${strValue(value)}`;
+  return `${' '.repeat(2)}- ${name}: ${strValue(value, offset)}`;
 };
 
-const added = (obj) => {
+const added = (obj, offset) => {
   const name = obj.key;
   const value = obj.value;
-  return `${' '.repeat(2)}+ ${name}: ${strValue(value)}`;
+  return `${' '.repeat(2)}+ ${name}: ${strValue(value, offset)}`;
 };
 
-const unchanged = (obj) => {
+const unchanged = (obj, offset) => {
   const name = obj.key;
   const value = obj.value;
-  return `${' '.repeat(4)}${name}: ${strValue(value)}`;
+  return `${' '.repeat(4)}${name}: ${strValue(value, offset)}`;
 };
 
-const haschildren = (obj, func) => {
+const haschildren = (obj, offset, func) => {
   const name = obj.key;
   const children = obj.children;
-  return `${' '.repeat(4)}${name}: {\n${children.map(elem => `${' '.repeat(4)}${func(elem)}`).join(`\n`)}
-  ${' '.repeat(4)}}`;
+  return `${' '.repeat(4)}${name}: {\n${children.map(elem => `${' '.repeat(offset)}${func(elem, offset*2)}`).join(`\n`)}
+  ${' '.repeat(offset-2)}}`;
 };
 
-const changed = (obj) => {
+const changed = (obj, offset) => {
   const name = obj.key;
   const value1 = obj.value1;
   const value2 = obj.value2;
-  return [`${' '.repeat(2)}- ${name}: ${strValue(value1)}`,
-  `${' '.repeat(2)}+ ${name}: ${strValue(value2)}`].join(`\n`);
+  return [`${' '.repeat(2)}- ${name}: ${strValue(value1, offset)}`,
+  `${' '.repeat(offset-2)}+ ${name}: ${strValue(value2, offset)}`].join(`\n`);
 }
 const parserTypes = [
   {
@@ -90,8 +90,9 @@ const parserTypes = [
 const getParserType = arg => _.find(parserTypes, ({ check }) => check(arg));
 
 const parseAst = (ast) => {
-  const parse = (elem) => getParserType(elem).parser(elem, parse);
-  return ast.map(parse).join(`\n`)
+  const offset = 4;
+  const parse = (elem, offset) => getParserType(elem).parser(elem, offset, parse);
+  return ast.map(elem => parse(elem, offset)).join(`\n`)
 };
 
 
