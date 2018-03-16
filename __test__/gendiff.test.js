@@ -1,5 +1,10 @@
 import genDiff from '../src/';
 
+const expectedPlain =
+`Property 'timeout' was updated. From '50' to '20'
+Property 'proxy' was removed with value: '123.234.53.22'
+Property 'verbose' was added with value: 'true'`;
+
 const expected =
 `{
     host: hexlet.io
@@ -52,4 +57,8 @@ test('tostring files diff ini', () => {
 test('step 5 ast', () => {
   expect(genDiff('./__test__/__fixtures__/before1.json', './__test__/__fixtures__/after1.json'))
   .toBe(expectedTreeJson);
+});
+
+test('tostring files diff plain format', () => {
+  expect(genDiff('./__test__/__fixtures__/before.json', './__test__/__fixtures__/after.json', 'plain')).toBe(expectedPlain);
 });
