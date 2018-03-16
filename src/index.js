@@ -103,7 +103,6 @@ const genDiff = (fileBefore, fileAfter) => {
   const objBefore = parseFile(dataBefore, format);
   const objAfter = parseFile(dataAfter, format);
   const ast = buildAst(objBefore, objAfter);
-  console.log(ast);
   return `{\n${parseAst(ast)}\n}`;
 };
 

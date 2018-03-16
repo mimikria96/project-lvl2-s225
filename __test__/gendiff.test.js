@@ -8,7 +8,7 @@ const expected =
   - proxy: 123.234.53.22
   + verbose: true
 }`;
-const expectedtree =
+const expectedTreeJson =
 `{
     common: {
         setting1: Value 1
@@ -51,5 +51,5 @@ test('tostring files diff ini', () => {
 
 test('step 5 ast', () => {
   expect(genDiff('./__test__/__fixtures__/before1.json', './__test__/__fixtures__/after1.json'))
-  .toBe(expectedtree);
+  .toBe(expectedTreeJson);
 });
