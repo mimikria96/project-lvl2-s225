@@ -1,4 +1,6 @@
 import genDiff from '../src/';
+import expjson from './__fixtures__/expectedjson';
+import exptree from './__fixtures__/exptree';
 
 const expectedPlain =
 `Property 'timeout' was updated. From '50' to '20'
@@ -13,42 +15,8 @@ const expected =
   - proxy: 123.234.53.22
   + verbose: true
 }`;
-const expectedTreeJson =
-`{
-    common: {
-        setting1: Value 1
-      - setting2: 200
-      - setting3: true
-      + setting3: {
-            key: value
-        }
-        setting6: {
-            key: value
-          + ops: vops
-        }
-      + setting4: blah blah
-      + setting5: {
-            key5: value5
-        }
-    }
-    group1: {
-      - baz: bas
-      + baz: bars
-        foo: bar
-      - nest: {
-            key: value
-        }
-      + nest: str
-    }
-  - group2: {
-        abc: 12345
-    }
-  + group3: {
-        fee: 100500
-    }
-}`;
 
-const expectedJson = '{"  common":{"  setting1":"Value 1","- setting2":"200","- setting3":true,"+ setting3":{"key":"value"},"  setting6":{"  key":"value","+ ops":"vops"},"+ setting4":"blah blah","+ setting5":{"key5":"value5"}},"  group1":{"- baz":"bas","+ baz":"bars","  foo":"bar","- nest":{"key":"value"},"+ nest":"str"},"- group2":{"abc":"12345"},"+ group3":{"fee":"100500"}}';
+
 test('tostring files diff', () => {
   expect(genDiff('./__test__/__fixtures__/before.json', './__test__/__fixtures__/after.json')).toBe(expected);
 });
@@ -58,7 +26,7 @@ test('tostring files diff ini', () => {
 
 test('step 5 ast', () => {
   expect(genDiff('./__test__/__fixtures__/before1.json', './__test__/__fixtures__/after1.json'))
-  .toBe(expectedTreeJson);
+  .toBe(exptree());
 });
 
 test('tostring files diff plain format', () => {
@@ -66,5 +34,5 @@ test('tostring files diff plain format', () => {
 });
 
 test('tostring files diff json format', () => {
-  expect(genDiff('./__test__/__fixtures__/before1.json', './__test__/__fixtures__/after1.json', 'json')).toBe(expectedJson);
+  expect(genDiff('./__test__/__fixtures__/before1.json', './__test__/__fixtures__/after1.json', 'json')).toBe(expjson());
 });
