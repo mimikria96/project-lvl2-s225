@@ -31,36 +31,18 @@ const changed = (obj, parentName) => {
   return `Property '${parentName}${name}' was updated. From '${toStrValue(value1)}' to '${toStrValue(value2)}'`;
 };
 
-
-const parserTypes = [
-  {
-    check: obj => obj.type === 'removed',
-    parse: removed
-  },
-  {
-    check: obj => obj.type === 'added',
-    parse: added
-  },
-  {
-    check: obj => obj.type === 'unchanged',
-    parse: unchanged
-  },
-  {
-    check: obj => obj.type === 'haschildren',
-    parse: haschildren
-  },
-  {
-    check: obj => obj.type === 'changed',
-    parse: changed
-  }
-]
-
-const getParserType = arg => _.find(parserTypes, ({ check }) => check(arg));
+const parserTypes = {
+  removed: removed,
+  added: added,
+  unchanged: unchanged,
+  haschildren: haschildren,
+  changed: changed
+};
 
 const renderPlain = (ast) => {
   const parentName = '';
   console.log(ast)
-  const parse = (elem, parentName) => getParserType(elem).parse(elem, parentName, parse);
+  const parse = (elem, parentName) => parserTypes[elem.type](elem, parentName, parse);
   const result = ast.map(elem => parse(elem, parentName));
   return result.filter(elem => elem !== ' '). join(`\n`);
 };

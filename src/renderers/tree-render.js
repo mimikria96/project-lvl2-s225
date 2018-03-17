@@ -40,35 +40,18 @@ const changed = (obj, level) => {
   return [`${' '.repeat(2)}- ${name}: ${toStrValue(value1, offset)}`,
   `${' '.repeat(offset*2-2)}+ ${name}: ${toStrValue(value2, offset)}`].join(`\n`);
 }
-const parserTypes = [
-  {
-    check: obj => obj.type === 'removed',
-    parse: removed
-  },
-  {
-    check: obj => obj.type === 'added',
-    parse: added
-  },
-  {
-    check: obj => obj.type === 'unchanged',
-    parse: unchanged
-  },
-  {
-    check: obj => obj.type === 'haschildren',
-    parse: haschildren
-  },
-  {
-    check: obj => obj.type === 'changed',
-    parse: changed
-  }
-]
-
-const getParserType = arg => _.find(parserTypes, ({ check }) => check(arg));
+const parserTypes = {
+  removed: removed,
+  added: added,
+  unchanged: unchanged,
+  haschildren: haschildren,
+  changed: changed
+};
 
 const renderTree = (ast) => {
   const level = 1;
   console.log(ast)
-  const parse = (elem, offset) => getParserType(elem).parse(elem, offset, parse);
+  const parse = (elem, offset) => parserTypes[elem.type](elem, offset, parse);
   return `{\n${ast.map(elem => parse(elem, level)).join(`\n`)}\n}`;
 };
 
