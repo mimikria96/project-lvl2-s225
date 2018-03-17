@@ -30,7 +30,7 @@ const unchanged = (obj, level) => {
 const haschildren = (obj, level, func) => {
   const { name, children } = obj;
   const offset = level*2;
-  return `${' '.repeat(4)}${name}: {\n${children.map(elem => `${' '.repeat(offset*2)}${func(elem, level+1)}`).join(`\n`)}
+  return `${' '.repeat(4)}${name}: {\n${_.flatten(children.map(elem => `${' '.repeat(offset*2)}${func(elem, level+1)}`)).join(`\n`)}
   ${' '.repeat(offset*2-2)}}`;
 };
 
@@ -38,7 +38,7 @@ const changed = (obj, level) => {
   const { name, value1, value2 } = obj;
   const offset = level*2;
   return [`${' '.repeat(2)}- ${name}: ${toStrValue(value1, offset)}`,
-  `${' '.repeat(offset*2-2)}+ ${name}: ${toStrValue(value2, offset)}`].join(`\n`);
+  `${' '.repeat(offset*2-2)}+ ${name}: ${toStrValue(value2, offset)}`];
 }
 const parserTypes = {
   removed: removed,
@@ -52,7 +52,9 @@ const renderTree = (ast) => {
   const level = 1;
   console.log(ast)
   const parse = (elem, offset) => parserTypes[elem.type](elem, offset, parse);
-  return `{\n${ast.map(elem => parse(elem, level)).join(`\n`)}\n}`;
+  const result = ast.map(elem => parse(elem, level));
+  console.log(result);
+  return `{\n${_.flattenDeep(result).join(`\n`)}\n}`;
 };
 
 export default renderTree;
