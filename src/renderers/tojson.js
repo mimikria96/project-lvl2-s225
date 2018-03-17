@@ -49,7 +49,6 @@ const parserTypes = {
 };
 const renderJson = (ast) => {
   const level = 1;
-  console.log(ast)
   const parse = (elem, offset) => parserTypes[elem.type](elem, offset, parse);
   return `{\n${ast.map(elem => parse(elem, level)).join(`\n`)}\n}`;
 }

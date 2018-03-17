@@ -41,7 +41,6 @@ const parserTypes = {
 
 const renderPlain = (ast) => {
   const parentName = '';
-  console.log(ast)
   const parse = (elem, parentName) => parserTypes[elem.type](elem, parentName, parse);
   const result = ast.map(elem => parse(elem, parentName));
   return result.filter(elem => elem !== ' '). join(`\n`);
