@@ -26,7 +26,7 @@ const changed = (obj, acc) => {
   const { name, value1, value2 } = obj;
   const strname1 = `- ${name}`;
   const strname2 = `+ ${name}`;
-  return {...acc, [strname1]: value1 }, { [strname2]: value2};
+  return {...acc, [strname1]: value1, [strname2]: value2};
 }
 const parserTypes = {
   removed: removed,
