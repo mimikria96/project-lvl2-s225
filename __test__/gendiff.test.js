@@ -1,4 +1,3 @@
-import fs from 'fs';
 import genDiff from '../src/';
 
 const expectedPlain =
