@@ -1,3 +1,4 @@
+import fs from 'fs';
 import genDiff from '../src/';
 
 const expectedPlain =
@@ -47,6 +48,8 @@ const expectedTreeJson =
         fee: 100500
     }
 }`;
+
+const expectedJson = '{"  common":{"+ setting3":{"key":"value"},"  setting6":{"  key":"value","+ ops":"vops"},"+ setting4":"blah blah","+ setting5":{"key5":"value5"}},"  group1":{"+ nest":"str"},"- group2":{"abc":"12345"},"+ group3":{"fee":"100500"}}';
 test('tostring files diff', () => {
   expect(genDiff('./__test__/__fixtures__/before.json', './__test__/__fixtures__/after.json')).toBe(expected);
 });
@@ -61,4 +64,8 @@ test('step 5 ast', () => {
 
 test('tostring files diff plain format', () => {
   expect(genDiff('./__test__/__fixtures__/before.json', './__test__/__fixtures__/after.json', 'plain')).toBe(expectedPlain);
+});
+
+test('tostring files diff json format', () => {
+  expect(genDiff('./__test__/__fixtures__/before1.json', './__test__/__fixtures__/after1.json', 'json')).toBe(expectedJson);
 });
