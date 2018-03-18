@@ -48,12 +48,12 @@ const parserTypes = {
   changed: changed
 };
 
-const render = (ast, level) => {
+const renderTree = (ast, level) => {
   console.log(ast);
-  const parse = (elem, offset) => parserTypes[elem.type](elem, offset, render);
+  const parse = (elem, offset) => parserTypes[elem.type](elem, offset, renderTree);
   const result = ast.map(elem => parse(elem, level));
   console.log(result);
   return _.flatten(result).join(`\n`);
 };
-const renderTree = (ast) =>`{\n${renderTree(ast, 1)}\n}`;
-export default renderTree; 
+ 
+export default ast => `{\n${renderTree(ast, 1)}\n}`;
