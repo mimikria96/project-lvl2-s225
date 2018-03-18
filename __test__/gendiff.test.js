@@ -15,8 +15,8 @@ const expected =
   - proxy: 123.234.53.22
   + verbose: true
 }`;
-const exptree = fs.readFileSync('./__test__/__fixtures__/exptree.txt', 'utf8', (err, data) => console.log(data));
-const expjson = fs.readFileSync('./__test__/__fixtures__/expected.json', 'utf8', (err, data) => console.log(data));
+const exptree = fs.readFileSync('./__test__/__fixtures__/exptree.txt', 'utf8').toString();
+const expjson = fs.readFileSync('./__test__/__fixtures__/expected.json', 'utf8').toString();
 test('tostring files diff', () => {
   expect(genDiff('./__test__/__fixtures__/before.json', './__test__/__fixtures__/after.json')).toBe(expected);
 });

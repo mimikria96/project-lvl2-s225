@@ -6,7 +6,7 @@ const programCli = () => {
     .version('0.1.0')
     .description(`Compares two configuration files and shows a difference.`)
     .arguments('<firstConfig> <secondConfig>')
-    .option('-f, --format [type]', 'Output format')
+    .option('-f, --format [type]', 'Output format', 'tree')
     .action((firstConfig, secondConfig, type) => console.log(genDiff(firstConfig, secondConfig, type.format)))
     .parse(process.argv);
 };
