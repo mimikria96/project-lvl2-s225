@@ -7,10 +7,10 @@ import renderAst from './renderers';
 const buildAst = (obj1, obj2) => {
   const keys = _.union(Object.keys(obj1), Object.keys(obj2));
   const build = (key, objBefore, objAfter) => {
-    if (!objAfter[key]) {
+    if (!_.has(objAfter, key)) {
       return { type: 'removed', name : key, value: objBefore[key]};
     }
-    if (!objBefore[key]) {
+    if (!_.has(objBefore, key)) {
       return { type: 'added', name : key, value: objAfter[key]};
     }
     if (_.isObject(objBefore[key]) && _.isObject(objAfter[key])) {
