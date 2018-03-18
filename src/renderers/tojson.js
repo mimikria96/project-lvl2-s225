@@ -1,6 +1,6 @@
-import  _ from 'lodash';
+//import  _ from 'lodash';
 
-const toStrValue = (value, offset) => {
+/*const toStrValue = (value, offset) => {
   if (_.isObject(value)) {
   const keys = Object.keys(value);
   const str = keys.map(n => `${' '.repeat(offset*2+4)}"${n}": "${value[n]}"`).join('\n');
@@ -47,10 +47,9 @@ const parserTypes = {
   haschildren: haschildren,
   changed: changed
 };
+*/
 const renderJson = (ast) => {
-  const level = 1;
-  const parse = (elem, offset) => parserTypes[elem.type](elem, offset, parse);
-  return `{\n${ast.map(elem => parse(elem, level)).join(`\n`)}\n}`;
+  return  JSON.stringify(ast);
 }
 
 export default renderJson;

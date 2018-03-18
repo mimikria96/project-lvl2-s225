@@ -1,37 +1,5 @@
 export default () => {
 const result =
-`{
-  "  common": {
-      "  setting1": "Value 1"
-      "- setting2": "200"
-      "- setting3": "true"
-      "+ setting3": {
-            "key": "value"
-        }
-      "  setting6": {
-          "  key": "value"
-          "+ ops": "vops"
-        }
-      "+ setting4": "blah blah"
-      "+ setting5": {
-            "key5": "value5"
-        }
-    }
-  "  group1": {
-      "- baz": "bas"
-      "+ baz": "bars"
-      "  foo": "bar"
-      "- nest": {
-            "key": "value"
-        }
-      "+ nest": "str"
-    }
-  "- group2": {
-        "abc": "12345"
-    }
-  "+ group3": {
-        "fee": "100500"
-    }
-}`;
+"[{\"type\":\"haschildren\",\"name\":\"common\",\"children\":[{\"type\":\"unchanged\",\"name\":\"setting1\",\"value\":\"Value 1\"},{\"type\":\"removed\",\"name\":\"setting2\",\"value\":\"200\"},{\"type\":\"changed\",\"name\":\"setting3\",\"value2\":{\"key\":\"value\"},\"value1\":true},{\"type\":\"haschildren\",\"name\":\"setting6\",\"children\":[{\"type\":\"unchanged\",\"name\":\"key\",\"value\":\"value\"},{\"type\":\"added\",\"name\":\"ops\",\"value\":\"vops\"}]},{\"type\":\"added\",\"name\":\"setting4\",\"value\":\"blah blah\"},{\"type\":\"added\",\"name\":\"setting5\",\"value\":{\"key5\":\"value5\"}}]},{\"type\":\"haschildren\",\"name\":\"group1\",\"children\":[{\"type\":\"changed\",\"name\":\"baz\",\"value2\":\"bars\",\"value1\":\"bas\"},{\"type\":\"unchanged\",\"name\":\"foo\",\"value\":\"bar\"},{\"type\":\"changed\",\"name\":\"nest\",\"value2\":\"str\",\"value1\":{\"key\":\"value\"}}]},{\"type\":\"removed\",\"name\":\"group2\",\"value\":{\"abc\":\"12345\"}},{\"type\":\"added\",\"name\":\"group3\",\"value\":{\"fee\":\"100500\"}}]";
     return result;
 }
